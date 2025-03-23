@@ -131,7 +131,11 @@ public partial class MainWindow : Window
     private void Button_Click_Delete(object sender, RoutedEventArgs e)
     {
         if(!string.IsNullOrEmpty(result.Text))
-            result.Text = result.Text.Remove(result.Text.Length - 1);
+        {
+            var stringBuilder = new StringBuilder(result.Text);
+            stringBuilder.Length--;
+            result.Text = stringBuilder.ToString();
+        }
     }
 
     /// <summary>
@@ -140,10 +144,10 @@ public partial class MainWindow : Window
     private void Button_Click_Clear(object sender, RoutedEventArgs e)
     {
         if (!string.IsNullOrEmpty(result.Text))
-            result.Text = result.Text.Remove(0);
+            result.Text = string.Empty;
 
         if (!string.IsNullOrEmpty(history.Text))
-            history.Text = history.Text.Remove(0);
+            history.Text = string.Empty;
     }
 
     /// <summary>
