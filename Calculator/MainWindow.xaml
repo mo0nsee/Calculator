@@ -48,7 +48,7 @@
             <Button Grid.Column="2" Grid.Row="6" Content="3" Click="Button_Click_3"/>
             <Button Grid.Column="3" Grid.Row="6" Content="," Click="Button_Click_Comma"/>
             <Button Grid.Column="0" Grid.Row="7" Content="0" Grid.ColumnSpan="2" Click="Button_Click_0"/>
-            <Button Grid.Column="2" Grid.Row="7" Content="=" Grid.ColumnSpan="2" />
+            <Button Grid.Column="2" Grid.Row="7" Content="=" Grid.ColumnSpan="2" Click="Button_Click_Result" />
         </Grid>
     </Grid>
 </Window>

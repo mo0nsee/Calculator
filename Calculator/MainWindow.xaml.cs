@@ -189,4 +189,10 @@ public partial class MainWindow : Window
     {
         result.Text += "/";
     }
+
+    private void Button_Click_Result(object sender, RoutedEventArgs e)
+    {
+        ResultСalculation resultСalculation = new ResultСalculation(result.Text);
+        result.Text = resultСalculation.Result;
+    }
 }
