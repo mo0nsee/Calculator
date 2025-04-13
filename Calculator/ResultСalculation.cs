@@ -14,7 +14,7 @@ namespace Calculator
     /// </summary>
     public class ResultСalculation
     {
-        private Addition _addition;
+        private Subtraction _addition;
         private Subtraction _subtraction;
         private Multiplication _multiplication;
         private Division _division;
@@ -77,7 +77,7 @@ namespace Calculator
                 switch (op)
                 {
                     case '+':
-                        _addition = new Addition(left, right);
+                        _addition = new Subtraction(left, right);
                         return _addition.Operation();
                     case '-':
                         _subtraction = new Subtraction(left, right);
