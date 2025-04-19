@@ -1,6 +1,8 @@
 ﻿using Calculator.Operation;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -12,24 +14,53 @@ namespace Calculator
     /// <summary>
     /// Подсчёт результата
     /// </summary>
-    public class ResultСalculation
+    public class ResultCalculation
     {
-        private Subtraction _addition;
-        private Subtraction _subtraction;
-        private Multiplication _multiplication;
-        private Division _division;
-        private RemainderOfDivision _remainderOfDivision;
+        private int _id; // id
+        private DateTime _date = DateTime.Now; // дата, когда выражение было подсчитано
+        private StringBuilder _inputStr; // входная строка
+        private string _resultStr; // результат
 
-        private StringBuilder _inputStr;
+        private Addition _addition; // Класс суммирования
+        private Subtraction _subtraction; // Класс вычитания
+        private Multiplication _multiplication; // Класс умножения
+        private Division _division; // Класс деления
+        private RemainderOfDivision _remainderOfDivision; // Класс деления с отстатком
 
-        private string _resultStr;
+        public int Id
+        {
+            get => _id;
+            set => _id = value;
+        }
 
+        /// <summary>
+        /// Входное выражение
+        /// </summary>
+        public string InputExpression
+        {
+            get => _inputStr.ToString();
+            set => _inputStr = new StringBuilder(value);
+        }
+
+        /// <summary>
+        /// Результат
+        /// </summary>
         public string Result
         {
             get => _resultStr;
+            set => _resultStr = value;
         }
 
-        public ResultСalculation(string inputStr)
+        /// <summary>
+        /// Дата, когда выражение было посчитано
+        /// </summary>
+        public DateTime Date
+        {
+            get => _date;
+            set => _date = value;
+        }
+
+        public ResultCalculation(string inputStr)
         {
             if (inputStr == string.Empty)
                 _inputStr = new StringBuilder("");
@@ -39,6 +70,9 @@ namespace Calculator
                 ParsingInputStr();
             }
         }
+        public ResultCalculation()
+        {
+        }
 
         /// <summary>
         /// Запись результата
@@ -46,9 +80,9 @@ namespace Calculator
         private void ParsingInputStr()
         {
             double result = ParseExpression(_inputStr.ToString());
-            _inputStr.Clear();
-            _inputStr.Append(result.ToString());
-            _resultStr = _inputStr.ToString();
+            //_inputStr.Clear();
+            //_inputStr.Append(result.ToString());
+            _resultStr = result.ToString();
         }
 
         /// <summary>
@@ -77,7 +111,7 @@ namespace Calculator
                 switch (op)
                 {
                     case '+':
-                        _addition = new Subtraction(left, right);
+                        _addition = new Addition(left, right);
                         return _addition.Operation();
                     case '-':
                         _subtraction = new Subtraction(left, right);

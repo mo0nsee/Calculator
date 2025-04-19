@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -16,9 +17,12 @@ namespace Calculator;
 /// </summary>
 public partial class MainWindow : Window
 {
+    ConnectionDB db;
+
     public MainWindow()
     {
         InitializeComponent();
+        db = ConnectionDB.getInstance();
     }
 
     /// <summary>
@@ -192,7 +196,10 @@ public partial class MainWindow : Window
 
     private void Button_Click_Result(object sender, RoutedEventArgs e)
     {
-        ResultСalculation resultСalculation = new ResultСalculation(result.Text);
+        ResultCalculation resultСalculation = new ResultCalculation(result.Text);
         result.Text = resultСalculation.Result;
+        //Добавление в бд
+        db.ResultCalculations.Add(resultСalculation);
+        db.SaveChanges();
     }
 }
